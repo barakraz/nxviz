@@ -30,12 +30,14 @@ ccs = nx.connected_component_subgraphs(G)
 for i, g in enumerate(ccs):
     for n in g.nodes():
         G.node[n]['group'] = i
-m = CircosPlot(G, node_color='group')
+        G.node[n]['connectivity'] = nx.degree_centrality(G)[n]
+m = CircosPlot(G, node_color='group', node_grouping='group',
+               node_order='connectivity')
 m.draw()
-plt.show()
 
 
 # Make an ArcPlot.
-a = ArcPlot(G, node_color='group')
+a = ArcPlot(G, node_color='group', node_grouping='group',
+            node_order='connectivity')
 a.draw()
 plt.show()
