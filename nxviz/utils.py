@@ -116,3 +116,15 @@ cmaps = {
     'continuous': sequential.YlGnBu_9,
     'diverging': diverging.RdBu_11,
 }
+
+
+def has_edge_within_group(nodes_container, edges):
+    """
+    Given an iterable of nodes representing one "group" of nodes amongst the
+    graph, check whether there are edges amongst that group of nodes.
+    """
+    result = False
+    for n1, n2 in edges:
+        if n1 in nodes_container and n2 in nodes_container:
+            result = True
+    return result

@@ -7,7 +7,7 @@ import numpy as np
 
 def node_theta(nodelist, node):
     """
-    Maps node to Angle.
+    Maps node to angle. Used for Circos plots.
     """
     assert len(nodelist) > 0, 'nodelist must be a list of items.'
     assert node in nodelist, 'node must be inside nodelist.'
@@ -51,3 +51,22 @@ def circos_radius(n_nodes, node_r):
     B = (np.pi - A) / 2
     a = 2 * node_r
     return a * np.sin(B) / np.sin(A)
+
+
+def group_theta(groups, group):
+    """
+    Computes the major angle of a particular group. Right now, groups has to be
+    a list of 2 or 3 elements, as Hive plots are only capable of displaying 2
+    or 3 groups at a time.
+
+    Used for Hive Plots.
+
+    - groups: a list of all of the groups being used.
+    - group: the particular group to calculate the group major angle.
+    """
+    assert group in groups, '{0} not in {1}'.format(group, groups)
+
+    idx = groups.index(group)
+    theta = -np.pi + idx*2*np.pi/len(groups)
+
+    return theta
